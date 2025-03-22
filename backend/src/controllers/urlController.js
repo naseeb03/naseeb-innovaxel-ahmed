@@ -37,3 +37,32 @@ export const getOriginalUrl = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const updateUrl = async (req, res) => {
+  try {
+    const { shortCode } = req.params;
+    const { url } = req.body;
+
+    if (!url) {
+      return res.status(400).json({ error: "New URL is required" });
+    }
+
+    const urlEntry = await Url.findOne({ shortCode });
+
+    if(!urlEntry) {
+      return res.status(404).json({ error: "URL not found" });
+    }
+
+    urlEntry.url = url;
+    urlEntry.updatedAt = Date.now();
+    await urlEntry.save();
+
+    return res.status(200).json({
+      message: "URL updated successfully",
+      updatedUrl: urlEntry,
+    });
+  } catch (error) {
+    console.error("Error updating Short URL:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
