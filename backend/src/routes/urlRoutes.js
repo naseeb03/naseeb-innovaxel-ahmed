@@ -1,5 +1,5 @@
 import express from "express";
-import { createShortUrl, getOriginalUrl, updateUrl } from "../controllers/urlController.js";
+import { createShortUrl, deleteUrl, getOriginalUrl, updateUrl } from "../controllers/urlController.js";
 // import { createShortUrl, getOriginalUrl, updateUrl, deleteUrl, getUrlStats } from "../controllers/urlController.js";
 
 const router = express.Router();
@@ -10,7 +10,7 @@ router.get("/shorten/:shortCode", getOriginalUrl);
 
 router.put("/shorten/:shortCode", updateUrl);
 
-// router.delete("/shorten/:shortCode", deleteUrl);
+router.delete("/shorten/:shortCode", deleteUrl);
 
 // router.get("/shorten/:shortCode/stats", getUrlStats);
 

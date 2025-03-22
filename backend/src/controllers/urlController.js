@@ -65,4 +65,21 @@ export const updateUrl = async (req, res) => {
     console.error("Error updating Short URL:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
-}
+};
+
+export const deleteUrl = async (req, res) => {
+  try {
+    const { shortCode } = req.params;
+
+    const urlEntry = await Url.findOneAndDelete({ shortCode });
+
+    if (!urlEntry) {
+      return res.status(404).json({ error: "Short URL not found" });
+    }
+
+    return res.status(200).json({ message: "Short URL deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting short URL:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
