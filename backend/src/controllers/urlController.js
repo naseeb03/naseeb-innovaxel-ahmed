@@ -13,7 +13,10 @@ export const createShortUrl = async (req, res) => {
     return res.status(201).json(newUrl);
   } catch (error) {
     console.error("Error creating short URL:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ 
+      error: "Internal server error",
+      details: error.message,
+    });
   }
 };
 
@@ -34,7 +37,10 @@ export const getOriginalUrl = async (req, res) => {
     return res.status(200).json({ url: urlEntry.url });
   } catch (error) {
     console.error("Error retrieving original URL:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ 
+      error: "Internal server error",
+      details: error.message,
+    });
   }
 };
 
@@ -63,7 +69,10 @@ export const updateUrl = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating Short URL:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ 
+      error: "Internal server error",
+      details: error.message,
+    });
   }
 };
 
@@ -80,7 +89,10 @@ export const deleteUrl = async (req, res) => {
     return res.status(200).json({ message: "Short URL deleted successfully" });
   } catch (error) {
     console.error("Error deleting short URL:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ 
+      error: "Internal server error",
+      details: error.message,
+    });
   }
 };
 
@@ -97,6 +109,9 @@ export const getUrlStats = async (req, res) => {
     return res.status(200).json({ urlEntry });
   } catch (error) {
     console.error("Error fetching URL stats:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ 
+      error: "Internal server error",
+      details: error.message,
+    });
   }
 };
